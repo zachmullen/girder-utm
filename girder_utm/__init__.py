@@ -18,9 +18,9 @@ from girder_worker.docker.transforms.girder import (
     Description('Run UTM algorithm on a folder.')
     .modelParam('id', 'The input folder ID.', model=Folder, level=AccessType.READ)
     .modelParam('paramsId', 'The file representing the input params (CSV format).', model=File,
-                level=AccessType.READ, destName='paramsFile')
+                level=AccessType.READ, destName='paramsFile', paramType='formData')
     .modelParam('outputFolderId', 'The output folder ID.', model=Folder, level=AccessType.WRITE,
-                destName='outputFolder'))
+                destName='outputFolder', paramType='formData'))
 def _runUtm(folder, paramsFile, outputFolder):
     outpath = VolumePath('__results__')
     return docker_run.delay('samuelgerber/utm', container_args=[
